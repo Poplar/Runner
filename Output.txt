@@ -1,0 +1,59 @@
+[ece446@ece446 ece446]$ sudo dmesg -C
+[ece446@ece446 ece446]$ ls
+5  assignment6.c  list.h  Makefile  setup.sh  user  user.c
+[ece446@ece446 ece446]$ sudo ./setup.sh
+rm -f *.ko *.o Module* *mod* assign6
+sudo rmmod assignment6.ko
+Error: Module assignment6 is not currently loaded
+make: *** [clean] Error 1
+make -C /lib/modules/`uname -r`/build/ \
+                M=`pwd` modules
+make[1]: Entering directory `/usr/src/linux-headers-3.2.0-4-686-pae'
+  CC [M]  /home/ece446/ece446/assignment6.o
+/home/ece446/ece446/assignment6.c:23:3: warning: initialization from incompatible pointer type [enabled by default]
+/home/ece446/ece446/assignment6.c:23:3: warning: (near initialization for ‘fops.read’) [enabled by default]
+/home/ece446/ece446/assignment6.c:24:3: warning: initialization from incompatible pointer type [enabled by default]
+/home/ece446/ece446/assignment6.c:24:3: warning: (near initialization for ‘fops.write’) [enabled by default]
+/home/ece446/ece446/assignment6.c: In function ‘mywrite’:
+/home/ece446/ece446/assignment6.c:95:1: warning: control reaches end of non-void function [-Wreturn-type]
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/ece446/ece446/assignment6.mod.o
+  LD [M]  /home/ece446/ece446/assignment6.ko
+make[1]: Leaving directory `/usr/src/linux-headers-3.2.0-4-686-pae'
+make: `user' is up to date.
+[ece446@ece446 ece446]$ dmesg | tail
+
+<1>[59857.808565] Device successfully registered
+[ece446@ece446 ece446]$ user
+runner number 1 is Jonathan from America with a record time of 0:13:142
+runner number 2 is Jimmy the Snail from America with a record time of 2:15:726
+runner number 3 is "Robert'; DROP TABLE Students;--" from XKCD with a record time of 0:19:241
+runner number 4 is Hussein from America with a record time of 0:17:360
+runner number 5 is Hiroshi from Japan with a record time of 0:18:192
+[ece446@ece446 ece446]$ dmesg
+
+<1>[59857.808565] Device successfully registered
+[59874.058826] driver openedvalue of int is 13142
+[59874.059518] value of int is 135726
+[59874.059526] value of int is 19241
+[59874.059532] value of int is 17360
+[59874.059537] value of int is 18192
+[59874.067796] cleared list
+[59874.068951] closing driver
+[ece446@ece446 ece446]$ sudo make clean
+rm -f *.ko *.o Module* *mod* assign6
+rmmod assignment6.ko
+[ece446@ece446 ece446]$ ls
+5  assignment6.c  list.h  Makefile  setup.sh  user  user.c
+[ece446@ece446 ece446]$ dmesg
+
+<1>[59857.808565] Device successfully registered
+[59874.058826] driver openedvalue of int is 13142
+[59874.059518] value of int is 135726
+[59874.059526] value of int is 19241
+[59874.059532] value of int is 17360
+[59874.059537] value of int is 18192
+[59874.067796] cleared list
+[59874.068951] closing driver
+[59901.123629] removing driver
